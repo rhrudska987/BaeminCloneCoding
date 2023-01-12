@@ -5,13 +5,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostUserReq {
-    private String UserName;
-    private String id;
+    private int userId;
+    private String userName;
+    private String profileImage;
+    private String grade;
+    private double point;
+    private char userStatus;
+    private Timestamp createAt;
+    private Timestamp updateAt;
+    private String selectedAddress;
+    private String phoneNumber;
     private String email;
+    private String loginId;
     private String password;
+    private int totalReview;
+    private double avgReview;
+    private int fivepoint;
+    private int fourpoint;
+    private int threepoint;
+    private int twooint;
+    private int onepoint;
+    private char mailReceive;
+    private char SMSReceive;
 }

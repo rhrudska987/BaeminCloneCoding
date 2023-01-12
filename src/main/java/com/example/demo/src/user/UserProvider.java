@@ -11,7 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.TimeZone;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
@@ -53,10 +58,37 @@ public class UserProvider {
     }
 
 
-    public GetUserRes getUser(int userIdx) throws BaseException {
+    public GetUserRes getUser(int userId) throws BaseException {
         try {
-            GetUserRes getUserRes = userDao.getUser(userIdx);
+            GetUserRes getUserRes = userDao.getUser(userId);
             return getUserRes;
+        } catch (Exception exception) {
+            logger.error("App - getUser Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetNoticeRes> getUserNotice(int userId) throws BaseException {
+        try{
+            List<GetNoticeRes> getNoticeRes = userDao.getNoticeRes(userId);
+            for(int i=0; i<getNoticeRes.size(); i++){
+                Timestamp timestamp = Timestamp.valueOf(getNoticeRes.get(i).getCreateAt());
+                LocalDateTime localDateTime = timestamp.toLocalDateTime();
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM월 dd일 H:m");
+                String nowString = localDateTime.format(dateTimeFormatter);
+                getNoticeRes.get(i).setCreateAt(nowString);
+            }
+            return getNoticeRes;
+        } catch (Exception exception) {
+            logger.error("App - getUser Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetAddressRes> getUserAddress(int userId) throws BaseException {
+        try{
+            List<GetAddressRes> getAddressRes = userDao.getAddressRes(userId);
+            return getAddressRes;
         } catch (Exception exception) {
             logger.error("App - getUser Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
@@ -72,7 +104,7 @@ public class UserProvider {
         }
     }
 
-    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
+    /*public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
         try {
             User user = userDao.getPwd(postLoginReq);
 
@@ -85,7 +117,7 @@ public class UserProvider {
             }
 
             if(user.getPassword().equals(encryptPwd)){
-                int userIdx = user.getUserIdx();
+                int userIdx = user.getUserId();
                 String jwt = jwtService.createJwt(userIdx);
                 return new PostLoginRes(userIdx,jwt);
             }
@@ -96,5 +128,5 @@ public class UserProvider {
             logger.error("App - logIn Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
-    }
+    }*/
 }

@@ -3,6 +3,7 @@ package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
+import com.example.demo.config.BaseResponse;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import com.example.demo.utils.SHA256;
@@ -58,7 +59,54 @@ public class UserService {
         }
     }
 
-    public void modifyUserName(PatchUserReq patchUserReq) throws BaseException {
+    //POST
+    public PostAddressRes createAddress(PostAddressReq postAddressReq, int userId) throws BaseException {
+
+        try{
+            int addressId = userDao.createAddress(postAddressReq, userId);
+            //jwt 발급.
+            return new PostAddressRes(addressId);
+        } catch (Exception exception) {
+            logger.error("App - createUser Service Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public int delUserAddress(int userId, int addressId) throws BaseException {
+        try {
+            int result = userDao.delUserAddress(userId, addressId);
+            return result;
+        } catch(Exception exception){
+            logger.error("App - deleteUserAddress Service Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void leaveUser(PatchUserReq patchUserReq) throws BaseException {
+        try{
+            int result = userDao.leaveUser(patchUserReq);
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USERINFO);
+            }
+        } catch(Exception exception){
+            logger.error("App - leaveUser Service Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void modifyUserInfo(PatchUserReq patchUserReq) throws BaseException {
+        try {
+            int result = userDao.modifyUserInfo(patchUserReq);
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USERINFO);
+            }
+        } catch(Exception exception){
+            logger.error("App - modifyUserInfo Service Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    /*public void modifyUserName(PatchUserReq patchUserReq) throws BaseException {
         try{
             int result = userDao.modifyUserName(patchUserReq);
             if(result == 0){
@@ -68,5 +116,5 @@ public class UserService {
             logger.error("App - modifyUserName Service Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
-    }
+    }*/
 }
