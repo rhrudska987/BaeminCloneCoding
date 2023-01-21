@@ -1,180 +1,86 @@
-com/example/demo/src/review/model/PostReviewReq.java
- com.example.demo.src.review.model.PostReviewReq
 com/example/demo/src/category/CategoryController.java
  com.example.demo.src.category.CategoryController
 com/example/demo/src/heart/model/PostHeartReq.java
  com.example.demo.src.heart.model.PostHeartReq
-com/example/demo/src/review/ReviewDao.java
- com.example.demo.src.review.ReviewDao
 com/example/demo/src/stores/model/PostStoreMenuReq.java
  com.example.demo.src.stores.model.PostStoreMenuReq
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
 com/example/demo/src/heart/model/GetHeartRes.java
  com.example.demo.src.heart.model.GetHeartRes
-com/example/demo/src/stores/model/PatchStoreReq.java
- com.example.demo.src.stores.model.PatchStoreReq
-com/example/demo/utils/ValidationRegex.java
- com.example.demo.utils.ValidationRegex
-com/example/demo/src/orders/model/Order.java
- com.example.demo.src.orders.model.Order
-com/example/demo/config/WebConfig.java
- com.example.demo.config.WebConfig
-com/example/demo/src/user/model/GetNoticeRes.java
- com.example.demo.src.user.model.GetNoticeRes
-com/example/demo/config/BaseResponseStatus.java
- com.example.demo.config.BaseResponseStatus
-com/example/demo/src/stores/model/PatchStoreMenuReq.java
- com.example.demo.src.stores.model.PatchStoreMenuReq
-com/example/demo/src/stores/model/GetStoreMenuRes.java
- com.example.demo.src.stores.model.GetStoreMenuRes
-com/example/demo/src/user/model/PostAddressRes.java
- com.example.demo.src.user.model.PostAddressRes
-com/example/demo/src/category/model/GetCategoryRes.java
- com.example.demo.src.category.model.GetCategoryRes
-com/example/demo/src/review/ReviewController.java
- com.example.demo.src.review.ReviewController
-com/example/demo/src/review/model/PatchReviewReq.java
- com.example.demo.src.review.model.PatchReviewReq
-com/example/demo/src/user/model/GetAddressRes.java
- com.example.demo.src.user.model.GetAddressRes
-com/example/demo/src/orders/model/PostOrderRes.java
- com.example.demo.src.orders.model.PostOrderRes
-com/example/demo/src/heart/HeartController.java
- com.example.demo.src.heart.HeartController
-com/example/demo/src/category/CategoryProvider.java
- com.example.demo.src.category.CategoryProvider
-com/example/demo/src/oauth/OauthProvider.java
- com.example.demo.src.oauth.OauthProvider
-com/example/demo/src/heart/model/PatchHeartReq.java
- com.example.demo.src.heart.model.PatchHeartReq
-com/example/demo/src/category/CategoryService.java
- com.example.demo.src.category.CategoryService
-com/example/demo/config/secret/Secret.java
- com.example.demo.config.secret.Secret
-com/example/demo/src/user/model/PostOrderReq.java
- com.example.demo.src.user.model.PostOrderReq
-com/example/demo/src/user/model/PostUserRes.java
- com.example.demo.src.user.model.PostUserRes
-com/example/demo/src/review/model/PostReviewRes.java
- com.example.demo.src.review.model.PostReviewRes
-com/example/demo/config/BaseResponse.java
- com.example.demo.config.BaseResponse
-com/example/demo/src/orders/model/PostOrderReq.java
- com.example.demo.src.orders.model.PostOrderReq
-com/example/demo/src/oauth/model/PostKakaoCreateUserRes.java
- com.example.demo.src.oauth.model.PostKakaoCreateUserRes
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
-com/example/demo/src/stores/model/PostStoresReq.java
- com.example.demo.src.stores.model.PostStoresReq
-com/example/demo/src/orders/model/PatchOrderReq.java
- com.example.demo.src.orders.model.PatchOrderReq
-com/example/demo/config/BaseException.java
- com.example.demo.config.BaseException
-com/example/demo/src/oauth/model/PostKakaoUserRes.java
- com.example.demo.src.oauth.model.PostKakaoUserRes
-com/example/demo/src/user/model/PostAddressReq.java
- com.example.demo.src.user.model.PostAddressReq
-com/example/demo/src/review/model/GetUserReviewRes.java
- com.example.demo.src.review.model.GetUserReviewRes
-com/example/demo/src/coupon/model/GetCouponRes.java
- com.example.demo.src.coupon.model.GetCouponRes
-com/example/demo/src/category/CategoryDao.java
- com.example.demo.src.category.CategoryDao
-com/example/demo/utils/SHA256.java
- com.example.demo.utils.SHA256
-com/example/demo/src/user/model/PostOrderRes.java
- com.example.demo.src.user.model.PostOrderRes
-com/example/demo/src/stores/StoresService.java
- com.example.demo.src.stores.StoresService
-com/example/demo/src/stores/model/Stores.java
- com.example.demo.src.stores.model.Stores
-com/example/demo/src/user/model/PostUserReq.java
- com.example.demo.src.user.model.PostUserReq
 com/example/demo/src/heart/model/Heart.java
  com.example.demo.src.heart.model.Heart
-com/example/demo/src/user/model/PostLoginRes.java
- com.example.demo.src.user.model.PostLoginRes
-com/example/demo/src/oauth/OauthService.java
- com.example.demo.src.oauth.OauthService
+com/example/demo/src/stores/model/PatchStoreReq.java
+ com.example.demo.src.stores.model.PatchStoreReq
 com/example/demo/src/category/model/Stores.java
  com.example.demo.src.category.model.Stores
 com/example/demo/src/stores/model/PostStoreMenuRes.java
  com.example.demo.src.stores.model.PostStoreMenuRes
-com/example/demo/src/orders/model/OrderMenu.java
- com.example.demo.src.orders.model.OrderMenu
-com/example/demo/src/user/UserDao.java
- com.example.demo.src.user.UserDao
+com/example/demo/config/WebConfig.java
+ com.example.demo.config.WebConfig
 com/example/demo/src/stores/model/GetStoresRes.java
  com.example.demo.src.stores.model.GetStoresRes
-com/example/demo/src/orders/model/GetOrderRes.java
- com.example.demo.src.orders.model.GetOrderRes
-com/example/demo/src/user/model/PatchUserReq.java
- com.example.demo.src.user.model.PatchUserReq
+com/example/demo/config/BaseResponseStatus.java
+ com.example.demo.config.BaseResponseStatus
+com/example/demo/src/stores/model/PatchStoreMenuReq.java
+ com.example.demo.src.stores.model.PatchStoreMenuReq
 com/example/demo/src/stores/model/StoreMenu.java
  com.example.demo.src.stores.model.StoreMenu
-com/example/demo/src/WebSecurityConfig.java
- com.example.demo.src.WebSecurityConfig
-com/example/demo/src/test/TestController.java
- com.example.demo.src.test.TestController
-com/example/demo/src/orders/OrdersDao.java
- com.example.demo.src.orders.OrdersDao
+com/example/demo/src/stores/model/GetStoreMenuRes.java
+ com.example.demo.src.stores.model.GetStoreMenuRes
+com/example/demo/src/category/model/GetCategoryRes.java
+ com.example.demo.src.category.model.GetCategoryRes
+com/example/demo/src/heart/HeartController.java
+ com.example.demo.src.heart.HeartController
 com/example/demo/src/stores/model/PostStoresRes.java
  com.example.demo.src.stores.model.PostStoresRes
-com/example/demo/src/user/model/PostLoginReq.java
- com.example.demo.src.user.model.PostLoginReq
+com/example/demo/src/category/CategoryProvider.java
+ com.example.demo.src.category.CategoryProvider
 com/example/demo/src/oauth/model/PostKakaoUserReq.java
  com.example.demo.src.oauth.model.PostKakaoUserReq
 com/example/demo/src/stores/StoresProvider.java
  com.example.demo.src.stores.StoresProvider
-com/example/demo/src/oauth/OauthController.java
- com.example.demo.src.oauth.OauthController
 com/example/demo/src/oauth/model/PostKakaoCreateUserReq.java
  com.example.demo.src.oauth.model.PostKakaoCreateUserReq
-com/example/demo/src/review/model/Review.java
- com.example.demo.src.review.model.Review
+com/example/demo/src/heart/model/PatchHeartReq.java
+ com.example.demo.src.heart.model.PatchHeartReq
+com/example/demo/src/category/CategoryService.java
+ com.example.demo.src.category.CategoryService
 com/example/demo/src/heart/HeartProvider.java
  com.example.demo.src.heart.HeartProvider
-com/example/demo/src/review/ReviewProvider.java
- com.example.demo.src.review.ReviewProvider
+com/example/demo/config/secret/Secret.java
+ com.example.demo.config.secret.Secret
 com/example/demo/src/coupon/CouponDao.java
  com.example.demo.src.coupon.CouponDao
-com/example/demo/src/user/UserController.java
- com.example.demo.src.user.UserController
-com/example/demo/src/stores/StoresController.java
- com.example.demo.src.stores.StoresController
-com/example/demo/src/orders/OrdersController.java
- com.example.demo.src.orders.OrdersController
+com/example/demo/config/BaseResponse.java
+ com.example.demo.config.BaseResponse
 com/example/demo/src/heart/HeartDao.java
  com.example.demo.src.heart.HeartDao
 com/example/demo/src/coupon/CouponController.java
  com.example.demo.src.coupon.CouponController
-com/example/demo/src/orders/OrdersService.java
- com.example.demo.src.orders.OrdersService
-com/example/demo/src/user/model/User.java
- com.example.demo.src.user.model.User
+com/example/demo/src/oauth/model/PostKakaoCreateUserRes.java
+ com.example.demo.src.oauth.model.PostKakaoCreateUserRes
 com/example/demo/src/stores/StoresDao.java
  com.example.demo.src.stores.StoresDao
-com/example/demo/src/orders/OrdersProvider.java
- com.example.demo.src.orders.OrdersProvider
 com/example/demo/src/heart/HeartService.java
  com.example.demo.src.heart.HeartService
-com/example/demo/src/user/model/DelAddressRes.java
- com.example.demo.src.user.model.DelAddressRes
-com/example/demo/src/user/model/GetUserRes.java
- com.example.demo.src.user.model.GetUserRes
+com/example/demo/src/stores/model/PostStoresReq.java
+ com.example.demo.src.stores.model.PostStoresReq
 com/example/demo/src/category/model/GetCategoryStoreRes.java
  com.example.demo.src.category.model.GetCategoryStoreRes
 com/example/demo/DemoApplication.java
  com.example.demo.DemoApplication
+com/example/demo/config/BaseException.java
+ com.example.demo.config.BaseException
+com/example/demo/src/oauth/model/PostKakaoUserRes.java
+ com.example.demo.src.oauth.model.PostKakaoUserRes
+com/example/demo/src/oauth/model/PostNaverUserRes.java
+ com.example.demo.src.oauth.model.PostNaverUserRes
 com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
 com/example/demo/src/coupon/CouponProvider.java
  com.example.demo.src.coupon.CouponProvider
-com/example/demo/src/oauth/OauthDao.java
- com.example.demo.src.oauth.OauthDao
-com/example/demo/src/review/ReviewService.java
- com.example.demo.src.review.ReviewService
+com/example/demo/src/coupon/model/GetCouponRes.java
+ com.example.demo.src.coupon.model.GetCouponRes
+com/example/demo/src/category/CategoryDao.java
+ com.example.demo.src.category.CategoryDao

@@ -53,7 +53,7 @@ public class OauthService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=3277661e7e2b4dd852005604bbd81481");
+            sb.append("&client_id={REST_API}");
             sb.append("&redirect_uri=http://localhost:9000/oauth/kakao");
             sb.append("&code=" + code);
             bw.write(sb.toString());
@@ -89,64 +89,6 @@ public class OauthService {
         return access_Token;
     }
 
-    /*public void createKakaoUser(String token) {
-        String reqURL = "https://kapi.kakao.com/v2/user/me";
-
-        try{
-            URL url = new URL(reqURL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Authorization", "Bearer " + token);
-
-            int responseCode = connection.getResponseCode();
-            System.out.println("responseCode = " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line = "";
-            String result = "";
-
-            while((line = br.readLine()) != null){
-                result += line;
-            }
-            System.out.println("responseBody = " + result);
-
-            JSONParser parser = new JSONParser();
-            JSONObject object = (JSONObject) parser.parse(result);
-            JSONObject properties = (JSONObject) object.get("properties");
-            JSONObject kakao_account = (JSONObject) object.get("kakao_account");
-
-            Long id = (Long) object.get("id");
-            String nickName = (String) properties.get("nickname");
-            String email = (String) kakao_account.get("email");
-
-            *//*String kakao_account = (String) object.get("kakao_account");*//*
-            *//*boolean hasEmail = (boolean) object.get("has_email");
-            System.out.println("hasEmail = " + hasEmail);*//*
-
-            System.out.println("id : " + id);
-            System.out.println("nickName = " + nickName);
-            System.out.println("email = " + email);
-
-            *//*int checkEmail = oauthDao.checkEmail(email);
-            if(checkEmail == 1){
-                PostLoginRes postLoginRes = oauthProvider.login(email);
-                return postLoginRes;
-            }
-            else{
-                try{
-                    int userId = oauthDao.createUser(postUserReq);
-
-                }
-            }*//*
-
-            br.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
     public void createUser(PostKakaoCreateUserReq postKakaoCreateUserReq, int userId) throws BaseException {
         try {
             int result = oauthDao.registerUser(postKakaoCreateUserReq, userId);

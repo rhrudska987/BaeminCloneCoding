@@ -2,9 +2,7 @@ package com.example.demo.src.oauth;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.src.oauth.model.PostKakaoCreateUserReq;
-import com.example.demo.src.oauth.model.PostKakaoCreateUserRes;
 import com.example.demo.src.oauth.model.PostKakaoUserRes;
 import com.example.demo.src.user.UserService;
 import org.slf4j.Logger;
@@ -31,17 +29,6 @@ public class OauthController {
         this.oauthService = oauthService;
         this.userService = userService;
     }
-
-    /*@ResponseBody
-    @GetMapping("/kakao")
-    public void kakaoCallback(@RequestParam("code") String code, HttpSession httpSession) {
-        System.out.println("code = " + code);
-        String access_Token = oauthService.getKakaoAccessToken(code);
-        *//*oauthService.createKakaoUser(access_Token);*//*
-
-        PostKakaoUserRes userInfo = oauthService.GetUserInfo(access_Token);
-
-    }*/
 
     @ResponseBody
     @GetMapping("/kakao")
