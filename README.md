@@ -1,9 +1,38 @@
+# 배달의 민족 서버 클론코딩
+
+자바(IntelliJ), 스프링(IntelliJ), MySQL를 이용하여 배달의 민족 서버를 클론코딩 하였습니다.  
+배달의 민족의 모든 기능을 구현한 것은 아니지만 핵심 기능을 위주로 구현하였습니다.  
+과정에서 DB 설계, MVC 패턴과 JWT 및 소셜로그인에 대해 공부할 수 있었습니다.
+
 # Spring Boot Template
 본 템플릿은 소프트스퀘어드 서버 교육용 Spring Boot 템플릿 입니다. (2022 ver.)
 
-## ✨Common
-### REST API
-REST API의 기본 구성 원리를 반드시 구글링하여 익힌 뒤에 Route를 구성하자.
+## Spring Framework MVC
+![image](https://user-images.githubusercontent.com/59828706/213859361-14eaf58e-f99e-4efc-9457-84ffb4f89478.png)
+1) Client가 Request를 보낸다.  
+2) Controller가 Request URL을 수신한다.  
+3) Controller가 Provider/Service를 호출한다.  
+4) 비즈니스 로직을 수행하며, 데이터베이스에 접근하는 DAO를 이용해 결과값을 받아온다.  
+- Provider: Read와 관련된 것을 처리
+- Service: Insert, Update, Delete와 관련된 것을 처리
+5) DAO: db에 접속하여 비즈니스 로직 실행에 필요한 쿼리를 호출한다.
+
+## 목차
+### [1. ERD 모델 설계](#ERD 모델 설계)
+### [2. API 명세서 작성](#API 명세서 작성)
+### [3. JWT 인증](#JWT 인증)
+### [4. 소셜로그인](#소셜로그인)
+
+  
+## ERD 모델 설계
+<img width="871" alt="image" src="https://user-images.githubusercontent.com/59828706/213859808-84ae74d8-550a-4da2-bd4b-2df1e3de2556.png">
+전체 ERD
+<details>
+<summary>Entity</summary>
+<div markdown="1">
+asdfsafd
+</div>
+</details>
 
 ### Folder Structure
 - `src`: 메인 로직
