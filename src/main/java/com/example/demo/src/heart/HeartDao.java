@@ -1,12 +1,9 @@
 package com.example.demo.src.heart;
 
 import com.example.demo.src.heart.model.GetHeartRes;
+import com.example.demo.src.heart.model.Heart;
 import com.example.demo.src.heart.model.PatchHeartReq;
 import com.example.demo.src.heart.model.PostHeartReq;
-import com.example.demo.src.orders.model.GetOrderRes;
-import com.example.demo.src.orders.model.OrderMenu;
-import com.example.demo.src.orders.model.PatchOrderReq;
-import com.example.demo.src.orders.model.PostOrderReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,18 +21,31 @@ public class HeartDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    public int checkHeart(int userId, int storeId){
+        String checkHeartQuery = "select exists(select status from Heart where userId = ? and storeId = ?);";
+        return this.jdbcTemplate.queryForObject(checkHeartQuery,
+        int.class,
+        userId, storeId);
+    }
+
     public int createHeart(int userId, int storeId){
         String createHeartQuery = "insert into Heart (userId, storeId) VALUES (?,?)";
         Object[] createHeartParams = new Object[]{userId, storeId};
         this.jdbcTemplate.update(createHeartQuery, createHeartParams);
 
         String lastInserIdQuery = "select last_insert_id()"; //last_insert_id : 테이블의 마지막 autoIncrement 값을 리턴
-        return this.jdbcTemplate.queryForObject(lastInserIdQuery,int.class);
+        return this.jdbcTemplate.queryForObject(lastInserIdQuery, int.class);
     }
 
-    public int cancelHeart(PatchHeartReq patchHeartReq){
-        String cancelHeartQuery = "update Heart set status = ? where heartId = ? and userId = ?";
-        Object[] cancelHeartParams = new Object[]{patchHeartReq.getStatus(), patchHeartReq.getHeartId(), patchHeartReq.getUserId()};
+    public int doHeart(int userId, int storeId){
+        String cancelHeartQuery = "update Heart set status = 'N' where storeId = ? and userId = ?";
+        Object[] cancelHeartParams = new Object[]{storeId, userId};
+        return this.jdbcTemplate.update(cancelHeartQuery, cancelHeartParams);
+    }
+
+    public int cancelHeart(int userId, int storeId){
+        String cancelHeartQuery = "update Heart set status = 'Y' where storeId = ? and userId = ?";
+        Object[] cancelHeartParams = new Object[]{storeId, userId};
         return this.jdbcTemplate.update(cancelHeartQuery, cancelHeartParams);
     }
 
@@ -51,5 +61,13 @@ public class HeartDao {
                         rs.getString("deliveryTip"),
                         rs.getString("status")),
                 getHeartParams);
+    }
+
+    public GetHeartRes getHeart(int userId, int storeId){
+        String getHeartResQuery = "select status from Heart where userId = ? and storeId = ?;";
+        return this.jdbcTemplate.queryForObject(getHeartResQuery,
+                (rs, rowNum) -> new GetHeartRes(
+                        rs.getString("status")),
+                userId, storeId);
     }
 }

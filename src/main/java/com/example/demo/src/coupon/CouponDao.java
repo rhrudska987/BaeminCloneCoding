@@ -20,14 +20,14 @@ public class CouponDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<GetCouponRes> getCouponRes(int userId, String status){
+    public List<GetCouponRes> getCouponRes(int userId){
         String getCouponQuery = "select distinct couponPrice, couponName, minimumOrderAmount, Coupon.createAt, expiredAt, couponImage from Coupon inner join User_Coupon join User_Coupon UC on Coupon.couponId = UC.couponId inner join User U on User_Coupon.userId = U.userId where U.userId = ? and Coupon.status = ?;";
-        Object[] getCouponParams = new Object[]{userId, status};
+        Object[] getCouponParams = new Object[]{userId};
         return this.jdbcTemplate.query(getCouponQuery,
                 (rs,rowNum) -> new GetCouponRes(
-                        rs.getString("couponPrice"),
+                        rs.getInt("couponPrice"),
                         rs.getString("couponName"),
-                        rs.getString("minimumOrderAmount"),
+                        rs.getInt("minimumOrderAmount"),
                         rs.getString("createAt"),
                         rs.getString("expiredAt"),
                         rs.getString("couponImage")),

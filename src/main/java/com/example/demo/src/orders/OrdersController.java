@@ -6,6 +6,7 @@ import com.example.demo.src.orders.model.*;
 import com.example.demo.src.user.model.GetAddressRes;
 import com.example.demo.src.user.model.PatchUserReq;
 import com.example.demo.src.user.model.User;
+import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.demo.config.BaseResponseStatus.CANCELED_ORDER;
-import static com.example.demo.config.BaseResponseStatus.LEAVE_USER;
+import static com.example.demo.config.BaseResponseStatus.*;
 
 @RestController
 @RequestMapping("/users")
@@ -25,10 +25,13 @@ public class OrdersController {
     private final OrdersProvider ordersProvider;
     @Autowired
     private final OrdersService ordersService;
+    @Autowired
+    private final JwtService jwtService;
 
-    public OrdersController(OrdersProvider ordersProvider, OrdersService ordersService){
+    public OrdersController(OrdersProvider ordersProvider, OrdersService ordersService, JwtService jwtService){
         this.ordersProvider = ordersProvider;
         this.ordersService = ordersService;
+        this.jwtService = jwtService;
     }
 
     /**
@@ -40,6 +43,12 @@ public class OrdersController {
     @PostMapping("/{userId}/orders")
     public BaseResponse<PostOrderRes> createOrder(@PathVariable("userId") int userId, @RequestBody PostOrderReq postOrderReq) {
         try{
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
             postOrderReq.setUserId(userId);
             PostOrderRes postOrderRes = ordersService.createOrder(postOrderReq);
             return new BaseResponse<>(postOrderRes);
@@ -55,12 +64,17 @@ public class OrdersController {
      */
     @ResponseBody
     @PatchMapping("/{userId}/orders/{orderId}")
-    public BaseResponse<String> cancelOrder(@PathVariable("userId") int userId, @PathVariable("orderId") int orderId, @RequestBody Order order){
+    public BaseResponse<String> cancelOrder(@PathVariable("userId") int userId, @PathVariable("orderId") int orderId){
         try{
-            PatchOrderReq patchOrderReq = new PatchOrderReq(orderId, userId, order.getCancelStatus());
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            PatchOrderReq patchOrderReq = new PatchOrderReq(orderId, userId);
             ordersService.cancelOrder(patchOrderReq);
-            String result = "";
-            return new BaseResponse<>(result);
+            return new BaseResponse<>();
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
@@ -75,6 +89,12 @@ public class OrdersController {
     @GetMapping("/{userId}/orders/{orderId}") // (GET) 127.0.0.1:9000/users/:userid/orders/:orderId
     public BaseResponse<List<GetOrderRes>> getUserOrder(@PathVariable("userId") int userId, @PathVariable("orderId") int orderId) {
         try{
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
             List<GetOrderRes> getOrderRes = ordersProvider.getUserOrder(userId, orderId);
             return new BaseResponse<>(getOrderRes);
         } catch(BaseException exception){

@@ -41,8 +41,8 @@ public class ReviewDao {
     }
 
     public int cancelReview(PatchReviewReq patchReviewReq){
-        String cancelReviewQuery = "update Review set status = ? where reviewId = ? and userId = ?";
-        Object[] cancelReviewParams = new Object[]{patchReviewReq.getStatus(), patchReviewReq.getReviewId(), patchReviewReq.getUserId()};
+        String cancelReviewQuery = "update Review set status = 'N' where reviewId = ? and userId = ?";
+        Object[] cancelReviewParams = new Object[]{patchReviewReq.getReviewId(), patchReviewReq.getUserId()};
         return this.jdbcTemplate.update(cancelReviewQuery, cancelReviewParams);
     }
 

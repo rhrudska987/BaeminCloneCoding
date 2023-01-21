@@ -17,15 +17,21 @@ public class PatchUserReq {
     private int userId;
     private String profileImage;
     private String userName;
+    private String password;
     private String phoneNumber;
     private String mailReceive;
     private String SMSReceive;
     private String userStatus;
 
-    public PatchUserReq(int userId, String profileImage, String userName, String phoneNumber, String mailReceive, String SMSReceive) {
+    public PatchUserReq(int userId){
+        this.userId = userId;
+    }
+
+    public PatchUserReq(int userId, String profileImage, String userName, String password, String phoneNumber, String mailReceive, String SMSReceive) {
         this.userId = userId;
         this.profileImage = profileImage;
         this.userName = userName;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.mailReceive = mailReceive;
         this.SMSReceive = SMSReceive;

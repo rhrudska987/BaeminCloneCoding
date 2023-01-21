@@ -2,7 +2,6 @@ package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
-import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import com.example.demo.utils.SHA256;
@@ -10,18 +9,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.TimeZone;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
 //Provider : Read의 비즈니스 로직 처리
 @Service
+@Transactional(readOnly = true)
 public class UserProvider {
 
     private final UserDao userDao;
@@ -34,17 +33,6 @@ public class UserProvider {
     public UserProvider(UserDao userDao, JwtService jwtService) {
         this.userDao = userDao;
         this.jwtService = jwtService;
-    }
-
-    public List<GetUserRes> getUsers() throws BaseException{
-        try{
-            List<GetUserRes> getUserRes = userDao.getUsers();
-            return getUserRes;
-        }
-        catch (Exception exception) {
-            logger.error("App - getUserRes Provider Error", exception);
-            throw new BaseException(DATABASE_ERROR);
-        }
     }
 
     public List<GetUserRes> getUsersByEmail(String email) throws BaseException {
@@ -68,6 +56,16 @@ public class UserProvider {
         }
     }
 
+    public GetUserRes getUser(String email) throws BaseException {
+        try {
+            GetUserRes getUserRes = userDao.getUser(email);
+            return getUserRes;
+        } catch (Exception exception) {
+            logger.error("App - getUser Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
     public List<GetNoticeRes> getUserNotice(int userId) throws BaseException {
         try{
             List<GetNoticeRes> getNoticeRes = userDao.getNoticeRes(userId);
@@ -80,7 +78,7 @@ public class UserProvider {
             }
             return getNoticeRes;
         } catch (Exception exception) {
-            logger.error("App - getUser Provider Error", exception);
+            logger.error("App - getNotice Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
@@ -90,7 +88,7 @@ public class UserProvider {
             List<GetAddressRes> getAddressRes = userDao.getAddressRes(userId);
             return getAddressRes;
         } catch (Exception exception) {
-            logger.error("App - getUser Provider Error", exception);
+            logger.error("App - getAddress Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
@@ -104,11 +102,17 @@ public class UserProvider {
         }
     }
 
-    /*public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
-        try {
-            User user = userDao.getPwd(postLoginReq);
 
-            String encryptPwd;
+    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
+        User user;
+        String encryptPwd;
+        if(checkEmail(postLoginReq.getEmail()) == 0){
+            throw new BaseException(FAILED_TO_LOGIN);
+        }
+        try {
+            /*User*/ user = userDao.getPwd(postLoginReq);
+
+            /*String encryptPwd;*/
             try {
                 encryptPwd = new SHA256().encrypt(postLoginReq.getPassword());
             } catch (Exception exception) {
@@ -116,17 +120,25 @@ public class UserProvider {
                 throw new BaseException(PASSWORD_DECRYPTION_ERROR);
             }
 
-            if(user.getPassword().equals(encryptPwd)){
-                int userIdx = user.getUserId();
-                String jwt = jwtService.createJwt(userIdx);
-                return new PostLoginRes(userIdx,jwt);
+            /*if(user.getPassword().equals(encryptPwd)){
+                int userId = user.getUserId();
+                String jwt = jwtService.createJwt(userId);
+                return new PostLoginRes(userId,jwt);
             }
             else{
                 throw new BaseException(FAILED_TO_LOGIN);
-            }
+            }*/
         } catch (Exception exception) {
             logger.error("App - logIn Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
-    }*/
+        if(user.getPassword().equals(encryptPwd)){
+            int userId = user.getUserId();
+            String jwt = jwtService.createJwt(userId);
+            return new PostLoginRes(userId,jwt);
+        }
+        else{
+            throw new BaseException(FAILED_TO_LOGIN);
+        }
+    }
 }

@@ -3,15 +3,16 @@ package com.example.demo.src.heart;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.src.heart.model.*;
-import com.example.demo.src.orders.OrdersProvider;
-import com.example.demo.src.orders.OrdersService;
-import com.example.demo.src.orders.model.*;
+import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
+import static com.example.demo.config.BaseResponseStatus.INVALID_USER_JWT;
 
 @RestController
 @RequestMapping("/heart")
@@ -22,43 +23,46 @@ public class HeartController {
     private final HeartProvider heartProvider;
     @Autowired
     private final HeartService heartService;
+    @Autowired
+    private final JwtService jwtService;
 
-    public HeartController(HeartProvider heartProvider, HeartService heartService){
+    public HeartController(HeartProvider heartProvider, HeartService heartService, JwtService jwtService){
         this.heartProvider = heartProvider;
         this.heartService = heartService;
+        this.jwtService = jwtService;
     }
 
     /**
-     * 찜 하기 API
+     * 찜 API
      * [PATCH] /heart/users/:userId/stores/{storeId}
      * @return BaseResponse<PostHeartRes>
      */
     @ResponseBody
     @PostMapping("/users/{userId}/stores/{storeId}")
-    public BaseResponse<PostHeartRes> createHeart(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId/*, @RequestBody PostHeartReq postHeartReq*/) {
+    public BaseResponse<String> createHeart(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
         try{
-            /*postHeartReq.setUserId(userId);*/
-            PostHeartRes postHeartRes = heartService.createHeart(userId, storeId);
-            return new BaseResponse<>(postHeartRes);
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            int checkHeart = heartProvider.checkHeart(userId, storeId);
+            if(checkHeart == 0)
+                heartService.createHeart(userId, storeId);
+            else{
+                GetHeartRes getHeartRes = heartProvider.getHeartRes(userId, storeId);
+                if(getHeartRes.getStatus().equals("N"))
+                    heartService.cancelHeart(userId, storeId);
+                else if (getHeartRes.getStatus().equals("Y")) {
+                    heartService.doHeart(userId, storeId);
+                }
+                else{
+                    return new BaseResponse<>(DATABASE_ERROR);
+                }
+            }
+            return new BaseResponse<>();
         } catch(BaseException exception){
-            return new BaseResponse<>((exception.getStatus()));
-        }
-    }
-
-    /**
-     * 찜 해제 API
-     * [PATCH] /heart/:heartId/users/:userId
-     * @return BaseResponse<String>
-     */
-    @ResponseBody
-    @PatchMapping("/{heartId}/users/{userId}")
-    public BaseResponse<String> cancelHeart(@PathVariable("heartId") int heartId, @PathVariable("userId") int userId, @RequestBody Heart heart){
-        try{
-            PatchHeartReq patchHeartReq = new PatchHeartReq(heartId, userId, heart.getStatus());
-            heartService.cancelHeart(patchHeartReq);
-            String result = "";
-            return new BaseResponse<>(result);
-        } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
@@ -72,6 +76,12 @@ public class HeartController {
     @GetMapping("/users/{userId}") // (GET) 127.0.0.1:9000/heart/users/:userid?status=N
     public BaseResponse<List<GetHeartRes>> getHeart(@PathVariable("userId") int userId, @RequestParam("status") String status) {
         try{
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
             List<GetHeartRes> getHeartRes = heartProvider.getHeart(userId, status);
             return new BaseResponse<>(getHeartRes);
         } catch(BaseException exception){

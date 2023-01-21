@@ -10,9 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetCouponRes {
-    private String couponPrice;
+    private int couponPrice;
     private String couponName;
-    private String minimumOrderAmount;
+    private int minimumOrderAmount;
     private String createAt;
     private String expiredAt;
     private String couponImage;

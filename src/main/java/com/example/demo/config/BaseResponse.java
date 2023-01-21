@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.src.category.model.GetCategoryRes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,6 +19,18 @@ public class BaseResponse<T> {
     private final int code;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T result;
+
+    public BaseResponse(){
+        this.isSuccess = SUCCESS.isSuccess();
+        this.message = SUCCESS.getMessage();
+        this.code = SUCCESS.getCode();
+    }
+
+    public BaseResponse(GetCategoryRes result){
+        this.isSuccess = SUCCESS.isSuccess();
+        this.message = SUCCESS.getMessage();
+        this.code = SUCCESS.getCode();
+    }
 
     // 요청에 성공한 경우
     public BaseResponse(T result) {

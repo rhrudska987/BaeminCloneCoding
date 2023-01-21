@@ -12,5 +12,4 @@ import lombok.Setter;
 public class PatchOrderReq {
     private int orderId;
     private int userId;
-    private String cancelStatus;
 }

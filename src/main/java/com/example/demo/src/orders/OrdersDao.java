@@ -41,8 +41,8 @@ public class OrdersDao {
     }
 
     public int cancelOrder(PatchOrderReq patchOrderReq){
-        String cancelOrderQuery = "update Orders set cancelStatus = ? where userId = ? and orderId = ?";
-        Object[] cancelOrderParams = new Object[]{patchOrderReq.getCancelStatus(), patchOrderReq.getUserId(), patchOrderReq.getOrderId()};
+        String cancelOrderQuery = "update Orders set cancelStatus = 'N' where userId = ? and orderId = ?";
+        Object[] cancelOrderParams = new Object[]{patchOrderReq.getUserId(), patchOrderReq.getOrderId()};
         return this.jdbcTemplate.update(cancelOrderQuery, cancelOrderParams);
     }
 
@@ -63,7 +63,7 @@ public class OrdersDao {
                         rs.getInt("price")),
                 orderId);
 
-        String getUserOrderQuery = "select orderStatus, storeName, O.createAt, O.orderNumber, orderPrice, deliveryTip, totalPrice, totalPrice, destinationAddress, commentStore, commentRider from Orders O inner join Delivery D on O.orderId = D.orderId where O.userId = ? and O.orderId = ?;";
+        String getUserOrderQuery = "select distinct orderStatus, storeName, O.createAt, O.orderNumber, orderPrice, deliveryTip, totalPrice, totalPrice, destinationAddress, commentStore, commentRider from Orders O inner join Delivery D on O.orderId = D.orderId where O.userId = ? and O.orderId = ?;";
         Object[] getUserOrderParams = new Object[]{userId, orderId};
         return this.jdbcTemplate.query(getUserOrderQuery,
                 (rs,rowNum) -> new GetOrderRes(

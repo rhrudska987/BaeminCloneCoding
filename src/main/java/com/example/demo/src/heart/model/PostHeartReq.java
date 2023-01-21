@@ -12,4 +12,6 @@ import lombok.Setter;
 public class PostHeartReq {
     private int userId;
     private int storeId;
+    private int heartId;
+    private String status;
 }

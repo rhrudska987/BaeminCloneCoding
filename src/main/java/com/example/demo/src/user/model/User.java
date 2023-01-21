@@ -24,7 +24,6 @@ public class User {
     private String selectedAddress;
     private String phoneNumber;
     private String email;
-    private String loginId;
     private String password;
     private int totalReview;
     private double avgReview;
@@ -35,4 +34,19 @@ public class User {
     private int onepoint;
     private String mailReceive;
     private String SMSReceive;
+    private String contract1;
+    private String contract2;
+    private String contract3;
+    private String contract4;
+    private String contract5;
+
+    public User(int userId, String userName, String password, String email) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+
+
+
 }

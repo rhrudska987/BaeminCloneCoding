@@ -1,57 +1,95 @@
 package com.example.demo.src.stores;
 
 import com.example.demo.config.BaseException;
+import com.example.demo.src.category.model.Stores;
 import com.example.demo.src.orders.OrdersDao;
 import com.example.demo.src.orders.model.GetOrderRes;
+import com.example.demo.src.stores.model.GetStoreMenuRes;
+import com.example.demo.src.stores.model.GetStoresRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
+import static com.example.demo.config.BaseResponseStatus.FAILED_TO_SEARCH;
 
 @Service
+@Transactional(readOnly = true)
 public class StoresProvider {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final OrdersDao ordersDao;
+    private final StoresDao storesDao;
 
     @Autowired
-    public StoresProvider(OrdersDao ordersDao){
-        this.ordersDao = ordersDao;
+    public StoresProvider(StoresDao storesDao){
+        this.storesDao = storesDao;
     }
 
-    public int checkCanceled(int orderId) throws BaseException {
+    public List<GetStoresRes> getStoresRes(int storeId) throws BaseException {
         try{
-            return ordersDao.checkCanceled(orderId);
-        } catch (Exception exception){
-            logger.error("App - checkEmail Provider Error", exception);
+            List<GetStoresRes> getStoresRes = storesDao.getStoresRes(storeId);
+            for(int i=0; i<getStoresRes.size(); i++) {
+                if (getStoresRes.get(i).getStatus().equals("O"))
+                    getStoresRes.get(i).setStatus("OPEN");
+                else
+                    getStoresRes.get(i).setStatus("CLOSE");
+            }
+
+            return getStoresRes;
+        } catch (Exception exception) {
+            logger.error("App - getStores Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public List<GetOrderRes> getUserOrder(int userId, int orderId) throws BaseException {
+    public GetStoresRes getStoresInfo(int storeId) throws BaseException {
         try{
-            List<GetOrderRes> getOrderRes = ordersDao.getOrderRes(userId, orderId);
-            for(int i=0; i<getOrderRes.size(); i++){
-                Timestamp timestamp = Timestamp.valueOf(getOrderRes.get(i).getCreateAt());
-                LocalDateTime localDateTime = timestamp.toLocalDateTime();
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 a h:m");
-                String nowString = localDateTime.format(dateTimeFormatter);
-                getOrderRes.get(i).setCreateAt(nowString);
-                if(getOrderRes.get(i).getOrderStatus().equals("Y"))
-                    getOrderRes.get(i).setOrderStatus("배달이 완료되었어요");
-                else
-                    getOrderRes.get(i).setOrderStatus("주문이 취소되었어요");
-            }
-            return getOrderRes;
+            GetStoresRes getStoresRes = storesDao.getStoresInfo(storeId);
+            return getStoresRes;
         } catch (Exception exception) {
-            logger.error("App - getUser Provider Error", exception);
+            logger.error("App - getStores Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public GetStoreMenuRes getStoreMenuInfo(int storeId, int storeMenuId) throws BaseException {
+        try{
+            GetStoreMenuRes getStoreMenuRes = storesDao.getStoreMenuInfo(storeId, storeMenuId);
+            return getStoreMenuRes;
+        } catch (Exception exception) {
+            logger.error("App - getStoresMenu Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<Stores> getSearchStore(String keyword) throws BaseException {
+        try{
+            List<Stores> stores = storesDao.getSearchStore();
+            List<Stores> searchedStores = new ArrayList<>();
+            for(int i=0; i<stores.size(); i++){
+                if(stores.get(i).getStoreName().contains(keyword))
+                    searchedStores.add(stores.get(i));
+            }
+            if(searchedStores.size() == 0){
+                throw new BaseException(FAILED_TO_SEARCH);
+            }
+            for(int i=0; i<searchedStores.size(); i++) {
+                if (stores.get(i).getStatus().equals("O"))
+                    stores.get(i).setStatus("OPEN");
+                else
+                    stores.get(i).setStatus("CLOSE");
+            }
+            return searchedStores;
+        } catch (Exception exception) {
+            logger.error("App - getSearchStore Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }

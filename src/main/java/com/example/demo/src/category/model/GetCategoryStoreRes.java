@@ -1,4 +1,4 @@
-package com.example.demo.src.heart.model;
+package com.example.demo.src.category.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostHeartRes {
-    private int heartId;
+public class GetCategoryStoreRes {
+    private String categoryName;
+    private Stores[] stores;
 }

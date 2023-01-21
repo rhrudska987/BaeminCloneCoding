@@ -11,10 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
+@Transactional
 public class OrdersService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,7 +35,7 @@ public class OrdersService {
             int orderId = ordersDao.createOrder(postOrderReq);
             return new PostOrderRes(orderId);
         } catch (Exception exception) {
-            logger.error("App - createUser Service Error", exception);
+            logger.error("App - createOrder Service Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
@@ -48,7 +50,7 @@ public class OrdersService {
                 throw new BaseException(CANCEL_FAIL_ORDER);
             }
         } catch(Exception exception){
-            logger.error("App - leaveUser Service Error", exception);
+            logger.error("App - cancelOrder Service Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }

@@ -11,6 +11,7 @@ import com.example.demo.src.review.model.PostReviewReq;
 import com.example.demo.src.review.model.PostReviewRes;
 import com.example.demo.src.user.model.PostAddressReq;
 import com.example.demo.src.user.model.PostAddressRes;
+import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,13 @@ public class ReviewController {
     private final ReviewProvider reviewProvider;
     @Autowired
     private final ReviewService reviewService;
+    @Autowired
+    private final JwtService jwtService;
 
-    public ReviewController(ReviewProvider reviewProvider, ReviewService reviewService){
+    public ReviewController(ReviewProvider reviewProvider, ReviewService reviewService, JwtService jwtService){
         this.reviewProvider = reviewProvider;
         this.reviewService = reviewService;
+        this.jwtService = jwtService;
     }
 
     /**
@@ -43,12 +47,17 @@ public class ReviewController {
      */
     @ResponseBody
     @PatchMapping("/{reviewId}/users/{userId}")
-    public BaseResponse<String> cancelOrder(@PathVariable("reviewId") int reviewId, @PathVariable("userId") int userId, @RequestBody PatchReviewReq patchReviewReqs){
+    public BaseResponse<String> cancelOrder(@PathVariable("reviewId") int reviewId, @PathVariable("userId") int userId){
         try{
-            PatchReviewReq patchReviewReq = new PatchReviewReq(reviewId, userId, patchReviewReqs.getStatus());
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            PatchReviewReq patchReviewReq = new PatchReviewReq(reviewId, userId);
             reviewService.cancelReview(patchReviewReq);
-            String result = "";
-            return new BaseResponse<>(result);
+            return new BaseResponse<>();
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
@@ -78,10 +87,19 @@ public class ReviewController {
     @ResponseBody
     @PostMapping("/users/{userId}/stores/{storeId}")
     public BaseResponse<PostReviewRes> createReview(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId, @RequestBody PostReviewReq postReviewReq) {
-        if(postReviewReq.getComment() == null){
-            return new BaseResponse<>(POST_REVIEW_EMPTY_COMMENT);
-        }
         try{
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(userId != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            if(postReviewReq.getComment() == null){
+                return new BaseResponse<>(POST_REVIEW_EMPTY_COMMENT);
+            }
+            if(postReviewReq.getComment().length() > 30){
+                return new BaseResponse<>(POST_REVIEW_LENGTH_OVER_COMMENT);
+            }
             postReviewReq.setUserId(userId);
             postReviewReq.setStoreId(storeId);
             PostReviewRes postReviewRes = reviewService.createReview(postReviewReq);

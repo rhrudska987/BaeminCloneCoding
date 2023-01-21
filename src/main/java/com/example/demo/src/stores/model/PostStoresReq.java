@@ -14,7 +14,7 @@ public class PostStoresReq {
     private String telephoneNumber;
     private String address;
     private String comment;
-    private String minimumOrderAmount;
+    private int minimumOrderAmount;
     private String storeImage;
     private String storeImage1;
     private String storeImage2;

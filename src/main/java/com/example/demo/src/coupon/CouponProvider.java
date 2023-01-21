@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.List;
 import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
 
 @Service
+@Transactional(readOnly = true)
 public class CouponProvider {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -29,7 +31,7 @@ public class CouponProvider {
 
     public List<GetCouponRes> getCoupon(int userId, String status) throws BaseException {
         try{
-            List<GetCouponRes> getCouponRes = couponDao.getCouponRes(userId, status);
+            List<GetCouponRes> getCouponRes = couponDao.getCouponRes(userId);
             for(int i=0; i<getCouponRes.size(); i++) {
                 Timestamp timestampCreated = Timestamp.valueOf(getCouponRes.get(i).getCreateAt());
                 Timestamp timestampExpired = Timestamp.valueOf(getCouponRes.get(i).getExpiredAt());

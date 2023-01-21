@@ -16,4 +16,9 @@ public class GetHeartRes {
     private int minimumOrderAmount;
     private String deliveryTip;
     private String status;
+
+    public GetHeartRes(String status){
+        this.status = status;
+    }
+
 }

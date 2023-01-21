@@ -4,10 +4,12 @@ import com.example.demo.config.BaseException;
 import com.example.demo.src.heart.model.GetHeartRes;
 import com.example.demo.src.orders.OrdersDao;
 import com.example.demo.src.orders.model.GetOrderRes;
+import com.example.demo.src.user.model.GetUserRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -17,6 +19,7 @@ import java.util.List;
 import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
 
 @Service
+@Transactional(readOnly = true)
 public class HeartProvider {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,15 +29,6 @@ public class HeartProvider {
     public HeartProvider(HeartDao heartDao){
         this.heartDao = heartDao;
     }
-
-    /*public int checkCanceled(int orderId) throws BaseException {
-        try{
-            return ordersDao.checkCanceled(orderId);
-        } catch (Exception exception){
-            logger.error("App - checkEmail Provider Error", exception);
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }*/
 
     public List<GetHeartRes> getHeart(int userId, String status) throws BaseException {
         try{
@@ -47,7 +41,26 @@ public class HeartProvider {
             }
             return getHeartRes;
         } catch (Exception exception) {
-            logger.error("App - getUser Provider Error", exception);
+            logger.error("App - getHeart Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public GetHeartRes getHeartRes(int userId, int storeId) throws BaseException{
+        try {
+            GetHeartRes getHeartRes = heartDao.getHeart(userId, storeId);
+            return getHeartRes;
+        } catch (Exception exception) {
+            logger.error("App - getHeartRes Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public int checkHeart(int userId, int storeId) throws BaseException{
+        try{
+            return heartDao.checkHeart(userId, storeId);
+        } catch (Exception exception){
+            logger.error("App - checkHeart Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }

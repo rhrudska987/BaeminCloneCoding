@@ -13,10 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
+@Transactional
 public class ReviewService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -35,7 +37,7 @@ public class ReviewService {
             int reviewId = reviewDao.createReview(postReviewReq);
             return new PostReviewRes(reviewId);
         } catch (Exception exception) {
-            logger.error("App - createUser Service Error", exception);
+            logger.error("App - createReview Service Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
@@ -47,7 +49,7 @@ public class ReviewService {
                 throw new BaseException(CANCEL_FAIL_REVIEW);
             }
         } catch(Exception exception){
-            logger.error("App - leaveUser Service Error", exception);
+            logger.error("App - cancelReview Service Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
