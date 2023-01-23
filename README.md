@@ -1,7 +1,10 @@
 <div align=center>
-	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Yermi%20Github!&fontSize=90" />	
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Kyko%20Github!&fontSize=90" />	
 </div>
-# 배달의 민족 서버 클론코딩
+<h1>배달의 민족 서버 클론코딩</h1>
+배달의 민족의 모든 기능을 구현한 것은 아니지만 핵심 기능을 위주로 구현하였습니다.  
+과정에서 DB 설계, MVC 패턴과 JWT 및 소셜로그인에 대해 공부할 수 있었습니다.
+<br>
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
 	<p>✨ Platforms & Languages ✨</p>
@@ -21,12 +24,7 @@
   <img src="https://img.shields.io/badge/IntelliJ-000000?style=flat&logo=IntelliJ IDEA&logoColor=white" />
   <img src="https://img.shields.io/badge/DataGrip-000000?style=flat&logo=DataGrip&logoColor=white" />
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=Postman&logoColor=white" />
-  
-  
-
-자바(IntelliJ), 스프링(IntelliJ), MySQL를 이용하여 배달의 민족 서버를 클론코딩 하였습니다.  
-배달의 민족의 모든 기능을 구현한 것은 아니지만 핵심 기능을 위주로 구현하였습니다.  
-과정에서 DB 설계, MVC 패턴과 JWT 및 소셜로그인에 대해 공부할 수 있었습니다.
+</div>  
 
 # Spring Boot Template
 본 템플릿은 소프트스퀘어드 서버 교육용 Spring Boot 템플릿 입니다. (2022 ver.)
