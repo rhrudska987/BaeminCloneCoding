@@ -85,8 +85,7 @@ API 명세서의 경우 선물하기 기능은 제외하였습니다.
   
 Validation의 경우 code 2000번대로 값, 형식, 길이 등의 형식적 Validation은 Controller에서,  
 DB에서 검증해야 하는 의미적 Validation은 code 3000번대로 Provider 혹은 Service에서 처리하였습니다.  
-https://docs.google.com/spreadsheets/d/1gPQ4RF7OVo3WuTnoHzmRS508-hT4D1TE/edit?usp=sharing&ouid=109274003342609518676&rtpof=true&sd=true  
-배달의 민족 API 명세서
+[배달의 민족 API 명세서](https://docs.google.com/spreadsheets/d/1gPQ4RF7OVo3WuTnoHzmRS508-hT4D1TE/edit?usp=sharing&ouid=109274003342609518676&rtpof=true&sd=true)
 
 ## JWT 인증
 단순히 ID, Password를 DB값과 비교하는 것 대신 JWT(Json Web Token) 토큰을 이용하여 유저 인덱스 값을 비교하도록하여 보안을 높였습니다.
@@ -102,10 +101,8 @@ https://docs.google.com/spreadsheets/d/1gPQ4RF7OVo3WuTnoHzmRS508-hT4D1TE/edit?us
 
 ## 소셜로그인
 카카오 소셜로그인을 구현하였습니다.  
-https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api  
-<Kakao Developers>
-https://velog.io/@shwncho/Spring-Boot-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EB%A1%9C%EA%B7%B8%EC%9D%B8-APIoAuth-2.0  
-<참고자료>
+[Kakao Developer](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api)
+[카카오 소셜로그인 참고자료](https://velog.io/@shwncho/Spring-Boot-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EB%A1%9C%EA%B7%B8%EC%9D%B8-APIoAuth-2.0)
 
 ## ✨License
 - 본 템플릿의 소유권은 소프트스퀘어드에 있습니다. 본 자료에 대한 상업적 이용 및 무단 복제, 배포 및 변경을 원칙적으로 금지하며 이를 위반할 때에는 형사처벌을 받을 수 있습니다.
