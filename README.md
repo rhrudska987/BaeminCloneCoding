@@ -101,7 +101,7 @@ DB에서 검증해야 하는 의미적 Validation은 code 3000번대로 Provider
 
 ## 소셜로그인
 카카오 소셜로그인을 구현하였습니다.  
-[Kakao Developer](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api)
+[Kakao Developer](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api)  
 [카카오 소셜로그인 참고자료](https://velog.io/@shwncho/Spring-Boot-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EB%A1%9C%EA%B7%B8%EC%9D%B8-APIoAuth-2.0)
 
 ## ✨License
