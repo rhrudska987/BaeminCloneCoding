@@ -1,5 +1,28 @@
+<div align=center>
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Yermi%20Github!&fontSize=90" />	
+</div>
 # 배달의 민족 서버 클론코딩
-![image](https://user-images.githubusercontent.com/59828706/214031918-a6a41524-6f32-4e71-9445-991cac8c8427.png)
+<div align=center>
+	<h3>📚 Tech Stack 📚</h3>
+	<p>✨ Platforms & Languages ✨</p>
+</div>
+<div align="center">
+<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white">
+</div>
+<br>
+<div align=center>
+  <p>🛠 Tools 🛠</p>
+</div>
+<div align=center>
+  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=AmazonAWS&logoColor=white" />
+  <img src="https://img.shields.io/badge/IntelliJ-000000?style=flat&logo=IntelliJ IDEA&logoColor=white" />
+  <img src="https://img.shields.io/badge/DataGrip-000000?style=flat&logo=DataGrip&logoColor=white" />
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=Postman&logoColor=white" />
+  
+  
 
 자바(IntelliJ), 스프링(IntelliJ), MySQL를 이용하여 배달의 민족 서버를 클론코딩 하였습니다.  
 배달의 민족의 모든 기능을 구현한 것은 아니지만 핵심 기능을 위주로 구현하였습니다.  
