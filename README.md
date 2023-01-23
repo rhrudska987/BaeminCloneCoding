@@ -93,7 +93,6 @@ Gift_Receiver <중간테이블><br>
 </details>
 
 ## API 명세서 작성
-인텔리제이, aws RDS, aws EC2, Postman을 사용하였습니다.  
 API 명세서의 경우 선물하기 기능은 제외하였습니다.
 ![image](https://user-images.githubusercontent.com/59828706/213859361-14eaf58e-f99e-4efc-9457-84ffb4f89478.png)  
 1) Client가 Request를 보낸다.  
@@ -109,7 +108,9 @@ DB에서 검증해야 하는 의미적 Validation은 code 3000번대로 Provider
 [배달의 민족 API 명세서](https://docs.google.com/spreadsheets/d/1gPQ4RF7OVo3WuTnoHzmRS508-hT4D1TE/edit?usp=sharing&ouid=109274003342609518676&rtpof=true&sd=true)
 
 ## JWT 인증
-단순히 ID, Password를 DB값과 비교하는 것 대신 JWT(Json Web Token) 토큰을 이용하여 유저 인덱스 값을 비교하도록하여 보안을 높였습니다.
+단순히 ID, Password를 DB값과 비교하는 것 대신 JWT(Json Web Token) 토큰을 이용하여 유저 인덱스 값을 비교하도록하여 보안을 높였습니다.  
+
+
 <img width="563" alt="image" src="https://user-images.githubusercontent.com/59828706/214027008-1febb853-f384-493d-8efa-77bac09f8c64.png">  
 <Controller에서 유저 인덱스 값 비교>  
 <img width="402" alt="image" src="https://user-images.githubusercontent.com/59828706/214027297-cf639a15-c2df-434c-9316-45b59e442479.png">  
