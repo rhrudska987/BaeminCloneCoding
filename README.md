@@ -73,6 +73,7 @@ Gift_Receiver <중간테이블><br>
 
 ## API 명세서 작성
 인텔리제이, aws RDS, aws EC2, Postman을 사용하였습니다.  
+API 명세서의 경우 선물하기 기능은 제외하였습니다.
 ![image](https://user-images.githubusercontent.com/59828706/213859361-14eaf58e-f99e-4efc-9457-84ffb4f89478.png)  
 1) Client가 Request를 보낸다.  
 2) Controller가 Request URL을 수신한다.  
