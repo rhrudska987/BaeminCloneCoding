@@ -1,7 +1,7 @@
 com/example/demo/src/review/model/PostReviewReq.java
  com.example.demo.src.review.model.PostReviewReq
-com/example/demo/src/category/CategoryController.java
- com.example.demo.src.category.CategoryController
+com/example/demo/src/stores/StoresDao.java
+ com.example.demo.src.stores.StoresDao
 com/example/demo/src/heart/model/PostHeartReq.java
  com.example.demo.src.heart.model.PostHeartReq
 com/example/demo/src/review/ReviewDao.java
@@ -32,22 +32,22 @@ com/example/demo/src/user/model/PostAddressRes.java
  com.example.demo.src.user.model.PostAddressRes
 com/example/demo/src/category/model/GetCategoryRes.java
  com.example.demo.src.category.model.GetCategoryRes
-com/example/demo/src/review/ReviewController.java
- com.example.demo.src.review.ReviewController
+com/example/demo/DemoApplication.java
+ com.example.demo.DemoApplication
 com/example/demo/src/review/model/PatchReviewReq.java
  com.example.demo.src.review.model.PatchReviewReq
 com/example/demo/src/user/model/GetAddressRes.java
  com.example.demo.src.user.model.GetAddressRes
 com/example/demo/src/orders/model/PostOrderRes.java
  com.example.demo.src.orders.model.PostOrderRes
-com/example/demo/src/heart/HeartController.java
- com.example.demo.src.heart.HeartController
+com/example/demo/src/orders/OrdersProvider.java
+ com.example.demo.src.orders.OrdersProvider
 com/example/demo/src/oauth/OauthDao.java
  com.example.demo.src.oauth.OauthDao
 com/example/demo/src/category/CategoryProvider.java
  com.example.demo.src.category.CategoryProvider
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
+com/example/demo/src/user/model/DelAddressRes.java
+ com.example.demo.src.user.model.DelAddressRes
 com/example/demo/src/heart/model/PatchHeartReq.java
  com.example.demo.src.heart.model.PatchHeartReq
 com/example/demo/src/category/CategoryService.java
@@ -66,8 +66,8 @@ com/example/demo/src/orders/model/PostOrderReq.java
  com.example.demo.src.orders.model.PostOrderReq
 com/example/demo/src/oauth/model/PostKakaoCreateUserRes.java
  com.example.demo.src.oauth.model.PostKakaoCreateUserRes
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
+com/example/demo/src/oauth/model/PostNaverUserRes.java
+ com.example.demo.src.oauth.model.PostNaverUserRes
 com/example/demo/src/stores/model/PostStoresReq.java
  com.example.demo.src.stores.model.PostStoresReq
 com/example/demo/src/orders/model/PatchOrderReq.java
@@ -142,41 +142,41 @@ com/example/demo/src/review/ReviewProvider.java
  com.example.demo.src.review.ReviewProvider
 com/example/demo/src/coupon/CouponDao.java
  com.example.demo.src.coupon.CouponDao
-com/example/demo/src/user/UserController.java
- com.example.demo.src.user.UserController
-com/example/demo/src/stores/StoresController.java
- com.example.demo.src.stores.StoresController
-com/example/demo/src/orders/OrdersController.java
- com.example.demo.src.orders.OrdersController
-com/example/demo/src/heart/HeartDao.java
- com.example.demo.src.heart.HeartDao
-com/example/demo/src/coupon/CouponController.java
- com.example.demo.src.coupon.CouponController
-com/example/demo/src/orders/OrdersService.java
- com.example.demo.src.orders.OrdersService
-com/example/demo/src/user/model/User.java
- com.example.demo.src.user.model.User
-com/example/demo/src/stores/StoresDao.java
- com.example.demo.src.stores.StoresDao
-com/example/demo/src/orders/OrdersProvider.java
- com.example.demo.src.orders.OrdersProvider
-com/example/demo/src/heart/HeartService.java
- com.example.demo.src.heart.HeartService
-com/example/demo/src/user/model/DelAddressRes.java
- com.example.demo.src.user.model.DelAddressRes
-com/example/demo/src/user/model/GetUserRes.java
- com.example.demo.src.user.model.GetUserRes
 com/example/demo/src/category/model/GetCategoryStoreRes.java
  com.example.demo.src.category.model.GetCategoryStoreRes
-com/example/demo/DemoApplication.java
- com.example.demo.DemoApplication
-com/example/demo/src/oauth/model/PostNaverUserRes.java
- com.example.demo.src.oauth.model.PostNaverUserRes
-com/example/demo/utils/JwtService.java
- com.example.demo.utils.JwtService
-com/example/demo/src/oauth/OauthProvider.java
- com.example.demo.src.oauth.OauthProvider
-com/example/demo/src/oauth/OauthService.java
- com.example.demo.src.oauth.OauthService
+com/example/demo/src/heart/HeartService.java
+ com.example.demo.src.heart.HeartService
+com/example/demo/src/user/model/User.java
+ com.example.demo.src.user.model.User
+com/example/demo/src/heart/HeartDao.java
+ com.example.demo.src.heart.HeartDao
+com/example/demo/src/user/model/GetUserRes.java
+ com.example.demo.src.user.model.GetUserRes
+com/example/demo/src/orders/OrdersService.java
+ com.example.demo.src.orders.OrdersService
+com/example/demo/src/coupon/CouponController.java
+ com.example.demo.src.coupon.CouponController
+com/example/demo/src/category/CategoryController.java
+ com.example.demo.src.category.CategoryController
+com/example/demo/src/user/UserService.java
+ com.example.demo.src.user.UserService
 com/example/demo/src/oauth/OauthController.java
  com.example.demo.src.oauth.OauthController
+com/example/demo/src/oauth/OauthProvider.java
+ com.example.demo.src.oauth.OauthProvider
+com/example/demo/src/review/ReviewController.java
+ com.example.demo.src.review.ReviewController
+com/example/demo/src/user/UserController.java
+ com.example.demo.src.user.UserController
+com/example/demo/utils/JwtService.java
+ com.example.demo.utils.JwtService
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
+com/example/demo/src/stores/StoresController.java
+ com.example.demo.src.stores.StoresController
+com/example/demo/src/heart/HeartController.java
+ com.example.demo.src.heart.HeartController
+com/example/demo/src/oauth/OauthService.java
+ com.example.demo.src.oauth.OauthService
+com/example/demo/src/orders/OrdersController.java
+ com.example.demo.src.orders.OrdersController

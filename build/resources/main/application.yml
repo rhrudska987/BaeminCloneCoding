@@ -1,18 +1,4 @@
-server:
-  port: 9000
 
 spring:
-  application:
-    name: demo
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
-
-  datasource:
-    platform: mysql
-    url: jdbc:mysql://rising-server.cn9h5fkyju6p.ap-northeast-2.rds.amazonaws.com/Baemin?autoReconnect=true # 변경해주세요
-    username: master # 변경해주세요
-    password: fkdldhs1! # 변경해주세요
-    driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
-    # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
+  profiles:
+    active: prod
