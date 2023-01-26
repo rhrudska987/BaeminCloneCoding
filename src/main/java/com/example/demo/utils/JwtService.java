@@ -44,18 +44,17 @@ public class JwtService {
         return request.getHeader("X-ACCESS-TOKEN");
     }
 
-    /*
+    /**
     JWT에서 userIdx 추출
     @return int
     @throws BaseException
-     */
+     **/
     public int getUserIdx() throws BaseException{
         //1. JWT 추출
         String accessToken = getJwt();
         if(accessToken == null || accessToken.length() == 0){
             throw new BaseException(EMPTY_JWT);
         }
-
         // 2. JWT parsing
         Jws<Claims> claims;
         try{
@@ -65,7 +64,6 @@ public class JwtService {
         } catch (Exception ignored) {
             throw new BaseException(INVALID_JWT);
         }
-
         // 3. userIdx 추출
         return claims.getBody().get("userId",Integer.class);
     }

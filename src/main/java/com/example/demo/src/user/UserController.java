@@ -63,13 +63,12 @@ public class UserController {
     /**
      * 특정 회원 알림 조회 API (알림센터)
      * [GET] /users/:userId/notice
-     * @return BaseResponse<GetNoticeRes>
+     * @return BaseResponse<List<GetNoticeRes>>
      */
     // Path-variable
     @ResponseBody
     @GetMapping("/{userId}/notice") // (GET) 127.0.0.1:9000/users/:userid/notice
     public BaseResponse<List<GetNoticeRes>> getUserNotice(@PathVariable("userId") int userId) {
-        // Get Users
         try{
             //jwt에서 idx 추출.
             int userIdxByJwt = jwtService.getUserIdx();

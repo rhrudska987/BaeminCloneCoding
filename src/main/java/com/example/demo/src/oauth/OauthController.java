@@ -4,6 +4,7 @@ import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.src.oauth.model.PostKakaoCreateUserReq;
 import com.example.demo.src.oauth.model.PostKakaoUserRes;
+import com.example.demo.src.oauth.model.PostNaverUserRes;
 import com.example.demo.src.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class OauthController {
     private final OauthService oauthService;
     @Autowired
     private final UserService userService;
+    private String apiResult = null;
 
     public OauthController(OauthService oauthService, UserService userService){
         this.oauthService = oauthService;
@@ -31,11 +33,11 @@ public class OauthController {
     }
 
     @ResponseBody
-    @GetMapping("/kakao")
+    @GetMapping("/kakao/callback")
     public BaseResponse<PostKakaoUserRes> kakaoCallback(@RequestParam("code") String code, HttpSession httpSession) {
         System.out.println("code = " + code);
         String access_Token = oauthService.getKakaoAccessToken(code);
-        PostKakaoUserRes userInfo = oauthService.GetUserInfo(access_Token);
+        PostKakaoUserRes userInfo = oauthService.GetKakaoUserInfo(access_Token);
         return new BaseResponse<>(userInfo);
     }
 
@@ -56,6 +58,15 @@ public class OauthController {
         }
         oauthService.createUser(postKakaoCreateUserReq, userId);
         return new BaseResponse<>();
+    }
+
+    @ResponseBody
+    @GetMapping("/naver/callback")
+    public BaseResponse<PostNaverUserRes> naverCallback(@RequestParam("code") String code, HttpSession httpSession) {
+        System.out.println("code = " + code);
+        String access_Token = oauthService.getNaverAccessToken(code);
+        PostNaverUserRes userInfo = oauthService.GetNaverUserInfo(access_Token);
+        return new BaseResponse<>(userInfo);
     }
 
 }
