@@ -26,9 +26,6 @@
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=Postman&logoColor=white" />
 </div>  
 
-# Spring Boot Template
-본 템플릿은 소프트스퀘어드 서버 교육용 Spring Boot 템플릿 입니다. (2022 ver.)
-
 ## 목차
 ### [1. ERD 모델 설계](#ERD-모델-설계)
 ### [2. API 명세서 작성](#API-명세서-작성)
