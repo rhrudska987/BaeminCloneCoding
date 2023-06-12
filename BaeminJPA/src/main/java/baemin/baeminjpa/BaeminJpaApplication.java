@@ -11,5 +11,4 @@ public class BaeminJpaApplication {
     public static void main(String[] args) {
         SpringApplication.run(BaeminJpaApplication.class, args);
     }
-
 }

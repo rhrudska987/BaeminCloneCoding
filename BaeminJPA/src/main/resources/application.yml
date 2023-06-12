@@ -7,13 +7,26 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    operations-sorter: alpha # alpha(알파벳 오름차순), method(HTTP메소드순)
+    tags-sorter: alpha # 태그 정렬 기준
+    path: /swagger-ui.html # html 문서 접속 경로
+    disable-swagger-default-url: true
+    doc-expansion: none #tag, operation 펼치는 방식
+  paths-to-match:
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
